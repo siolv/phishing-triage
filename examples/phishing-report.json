@@ -1,0 +1,129 @@
+{
+  "generated_at": "2026-11-19T20:29:29+08:00",
+  "input": "phishing.eml + 1 link",
+  "verdict": "LIKELY PHISHING",
+  "score": 100,
+  "signals": [
+    {
+      "code": "spf_fail",
+      "title": "SPF failed",
+      "severity": "high",
+      "weight": 20,
+      "evidence": "The sending server is not allowed to send mail for that domain.",
+      "category": "email"
+    },
+    {
+      "code": "dmarc_fail",
+      "title": "DMARC failed",
+      "severity": "critical",
+      "weight": 25,
+      "evidence": "The message failed the domain owner's DMARC policy.",
+      "category": "email"
+    },
+    {
+      "code": "reply_to_mismatch",
+      "title": "Reply-To goes to another domain",
+      "severity": "medium",
+      "weight": 12,
+      "evidence": "From is paypa1.com; Reply-To is paypal-help.top.",
+      "category": "email"
+    },
+    {
+      "code": "return_path_mismatch",
+      "title": "Return-Path goes to another domain",
+      "severity": "medium",
+      "weight": 10,
+      "evidence": "From is paypa1.com; Return-Path is paypal-help.top.",
+      "category": "email"
+    },
+    {
+      "code": "sender_lookalike_paypal",
+      "title": "Sender domain imitates a brand",
+      "severity": "critical",
+      "weight": 40,
+      "evidence": "paypa1 imitates paypal with swapped characters.",
+      "category": "email"
+    },
+    {
+      "code": "display_name_paypal",
+      "title": "Display name claims a brand",
+      "severity": "high",
+      "weight": 20,
+      "evidence": "The sender name says 'PayPal Security', but the address is @paypa1.com.",
+      "category": "email"
+    },
+    {
+      "code": "urgent_language",
+      "title": "Urgent or account-themed subject",
+      "severity": "low",
+      "weight": 5,
+      "evidence": "Subject contains: urgent, locked.",
+      "category": "email"
+    },
+    {
+      "code": "reply_brand_hyphen_paypal",
+      "title": "Reply-To domain imitates a brand",
+      "severity": "high",
+      "weight": 40,
+      "evidence": "paypal-help adds words to the brand 'paypal'.",
+      "category": "email"
+    },
+    {
+      "code": "domain_no_dns",
+      "title": "Domain does not resolve",
+      "severity": "medium",
+      "weight": 10,
+      "evidence": "paypal-help.top has no A record; the link or sender may be dead.",
+      "category": "domain"
+    }
+  ],
+  "urls": [
+    {
+      "display": "https://paypa1.com/verify?account=***&token=***",
+      "host": "paypa1.com",
+      "registered_domain": "paypa1.com",
+      "signals": [
+        "lookalike_paypal"
+      ]
+    }
+  ],
+  "email": {
+    "from_name": "PayPal Security",
+    "from_address": "security@paypa1.com",
+    "from_domain": "paypa1.com",
+    "reply_to": "PayPal Help <recover@paypal-help.top>",
+    "return_path": "<bounce@paypal-help.top>",
+    "subject": "Urgent: your account has been locked",
+    "spf": "fail",
+    "dkim": "none",
+    "dmarc": "fail",
+    "notes": [
+      "1 link was found in the message body."
+    ]
+  },
+  "domains": [
+    {
+      "domain": "paypa1.com",
+      "age_days": 9525,
+      "created": "2000-10-20",
+      "registrar": "MarkMonitor Inc.",
+      "notes": [
+        "DMARC policy for paypa1.com: p=reject."
+      ]
+    },
+    {
+      "domain": "paypal-help.top",
+      "age_days": 371,
+      "created": "2025-11-12",
+      "registrar": "NameSilo,LLC",
+      "notes": [
+        "No DMARC policy was found for paypal-help.top.",
+        "No SPF record was found for paypal-help.top."
+      ]
+    }
+  ],
+  "ai": {
+    "used": true,
+    "error": null
+  }
+}
