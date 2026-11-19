@@ -12,9 +12,9 @@ local Ollama model only writes the explanation and escalation draft.
 
 Standard library only. No `pip install`; Ollama is optional.
 
-![Triage report overview](docs/triage-overview.png)
+![Triage report overview](docs/01-report-overview.png)
 
-*Sample run on `samples/phishing.eml`. More: [email checks](docs/triage-email.png) · [local model note](docs/triage-ai-note.png).*
+*Sample run on `samples/phishing.eml`. Full set: [email checks](docs/02-email-checks.png) · [links and domain](docs/03-links-and-domain.png) · [AI escalation](docs/04-ai-escalation.png) · [CLI output](docs/05-cli-output.png).*
 
 ## Quick start
 
@@ -32,6 +32,8 @@ python triage.py --headers samples/phishing.eml --no-ai --no-lookup
 ```
 
 Output goes to `report.md`. Add `--json findings.json` for automation.
+
+![CLI output](docs/05-cli-output.png)
 
 ## What it checks
 
@@ -57,6 +59,10 @@ Output goes to `report.md`. Add `--json findings.json` for automation.
 - SPF record presence
 - Whether the domain resolves at all
 
+![Email authentication checks](docs/02-email-checks.png)
+
+![Link and domain checks](docs/03-links-and-domain.png)
+
 **The local model**
 - A 2-3 sentence summary for a non-technical reader
 - A ready-to-send escalation note
@@ -64,6 +70,8 @@ Output goes to `report.md`. Add `--json findings.json` for automation.
 
 The model is told to use only the evidence above, never to say "confirmed", and
 never to claim an email is safe.
+
+![Local model escalation note](docs/04-ai-escalation.png)
 
 ## Sample result
 
